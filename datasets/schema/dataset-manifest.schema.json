@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DatasetManifest",
+  "type": "object",
+  "required": ["schema_version", "name", "version", "license", "samples", "splits", "provenance"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "name": {"type": "string"},
+    "version": {"type": "string"},
+    "license": {"type": "object"},
+    "samples": {"type": "array"},
+    "splits": {"type": "object"},
+    "transforms": {"type": "array"},
+    "provenance": {"type": "object"}
+  }
+}
+

@@ -1,0 +1,15 @@
+[build-system]
+requires = []
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wellfriend-models"
+version = "0.1.0"
+description = "Reproducible Wellfriend model research, artifact validation, and registry contracts."
+requires-python = ">=3.11"
+license = "Apache-2.0"
+dependencies = []
+
+[tool.unittest]
+start-directory = "tests"
+
