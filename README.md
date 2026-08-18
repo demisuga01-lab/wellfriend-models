@@ -10,10 +10,9 @@ The production engine is [`wellfriend-perception`](https://github.com/wellfriend
 python tools/format_check.py
 python tools/lint.py
 python -m unittest discover -s tests -v
-python export/validate_artifact.py registry/document-detector
+python export/validate_artifact.py --allow-placeholder registry/document-detector
 ```
 
 MP1 supplies schemas, validators, training/evaluation scaffolds, and placeholder registries only. It does not train, redistribute, or claim performance for models.
 
 The repository is Apache-2.0. Dependencies and model/dataset licenses require explicit provenance records before adoption.
-
