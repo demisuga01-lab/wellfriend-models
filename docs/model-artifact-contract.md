@@ -19,6 +19,8 @@ model-name/
 
 Supported tasks are document segmentation, corner regression, quality prediction, restoration, cleanup mask prediction, OCR detection/recognition, and layout detection. A `placeholder` must set `production_ready: false`, contain no model file, and only validate with explicit placeholder permission. A `released` artifact must include `model.onnx` and pass checksum validation without that permission.
 
+MP6 promotion statuses are `placeholder`, `experimental`, `research`, `candidate`, `mobile_candidate`, `production_ready`, `deprecated`, and `blocked`. No-weight experimental entries may omit `model.onnx` only when `weights_included: false`; they require explicit non-production validation. A weight-bearing ONNX artifact needs `model.onnx`, matching checksums, schema-valid companion documents, and optional graph/runtime validation when ONNX tooling is installed.
+
 ```powershell
 python -m wellfriend_models.registry.validate path/to/model-artifact
 python -m wellfriend_models.registry.validate registry/document-detector/placeholder --allow-placeholder

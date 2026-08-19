@@ -13,3 +13,7 @@ provenance and environment evidence                    export contract
 ```
 
 Optional heavy ML dependencies are intentionally absent from base CI. Any future tensor, ONNX, quantization, or distillation implementation must retain the same contracts and license/provenance gates.
+
+## MP6 mobile optimization boundary
+
+MP6 adds device profiles, no-weight experimental mobile entries, distillation/quantization/pruning reports, tiling policies, promotion gates, and synthetic ScanBench model reports. These layers transform research evidence into a candidate artifact plan without turning Python into a production runtime or creating a production model claim.

@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "artifact_path": "registry/document-detector/low-mobile-experimental",
+  "device_profile": "configs/device-profiles/low.json",
+  "categories": ["easy-page", "rotated-page", "perspective-page", "low-contrast-page", "shadow-page", "glare-page", "blurred-page", "receipt-like-page", "cut-off-page", "multiple-distractors", "no-document"],
+  "seed": 601
+}
