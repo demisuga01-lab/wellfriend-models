@@ -1,0 +1,1 @@
+{"id":"DocRes","type":"external_audit_gated","audit_status":"audit-gated","weights_included":false,"production_ready":false,"reason":"code, weights, and training-data provenance remain separately audited"}

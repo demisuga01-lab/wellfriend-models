@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WellfriendExperimentConfig",
+  "type": "object",
+  "required": ["schema_version", "experiment_id", "seed", "task", "model", "dataset", "splits", "transforms", "losses", "optimizer", "scheduler", "batch_size", "epochs", "device", "precision", "logging", "checkpoints", "export", "reproducibility"],
+  "properties": {"schema_version": {"const": 1}, "seed": {"type": "integer"}}
+}

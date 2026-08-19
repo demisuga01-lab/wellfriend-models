@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "experiment_id": "smoke-document-corners",
+  "seed": 103,
+  "task": "document_corner_regression",
+  "model": {"family": "document-corners", "implementation": "cpu_mask_box_baseline"},
+  "dataset": {"kind": "synthetic", "width": 48, "height": 36, "count_per_case": 1},
+  "splits": {"train": 1.0}, "transforms": [], "losses": ["corner_regression_loss"],
+  "optimizer": {"name": "not_applicable"}, "scheduler": {"name": "not_applicable"},
+  "batch_size": 1, "epochs": 1, "device": "cpu", "precision": "fp32",
+  "logging": {"output_dir": "experiments"}, "checkpoints": {"enabled": false},
+  "export": {"family": "document-corners", "output_dir": "artifacts/smoke-document-corners"},
+  "reproducibility": {"deterministic": true, "synthetic_only": true}
+}

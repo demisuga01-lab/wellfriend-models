@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "WellfriendModelManifest",
+  "type": "object",
+  "required": ["schema_version", "model_id", "model_name", "version", "status", "production_ready", "domain", "task", "architecture", "input_spec", "output_spec", "preprocess_ref", "postprocess_ref", "training_data_refs", "evaluation_data_refs", "license", "weights_license", "intended_runtime", "device_class", "precision", "dynamic_shape_support", "metrics_ref", "hashes_ref", "limitations", "safety_notes", "provenance"],
+  "properties": {"schema_version": {"const": 1}, "status": {"enum": ["placeholder", "released"]}, "production_ready": {"type": "boolean"}}
+}

@@ -10,8 +10,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: python tools/format_check.py
-      - run: python tools/lint.py
-      - run: python -m unittest discover -s tests -v
-      - run: python export/validate_artifact.py --allow-placeholder registry/document-detector
-
+      - run: python -m pip install -e ".[dev]"
+      - run: ruff format --check .
+      - run: ruff check .
+      - run: python -m pytest -q
+      - run: python tools/check_dependency_register.py
+      - run: python -m wellfriend_models.datasets.validate datasets/examples/synthetic-document-manifest.json
+      - run: python -m wellfriend_models.registry.validate registry/document-detector/placeholder --allow-placeholder
+      - run: python -m wellfriend_models.registry.index registry/index.json --allow-placeholders --allow-nonproduction
+      - run: python -m wellfriend_models.benchmarks.run --smoke
+      - run: python -m wellfriend_models.benchmarks.run_model_bench --config configs/benchmarks/document_mobile_smoke.json --output-dir ${{ runner.temp }}/scanbench-models

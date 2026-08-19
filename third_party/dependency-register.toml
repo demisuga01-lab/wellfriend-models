@@ -8,6 +8,8 @@ source_url = "https://github.com/actions/checkout"
 purpose = "GitHub Actions checkout"
 risk_level = "low"
 status = "ci-only"
+used_by = ["GitHub Actions CI"]
+scope = "ci"
 
 [[dependency]]
 name = "actions/setup-python"
@@ -17,4 +19,82 @@ source_url = "https://github.com/actions/setup-python"
 purpose = "GitHub Actions Python setup"
 risk_level = "low"
 status = "ci-only"
+used_by = ["GitHub Actions CI"]
+scope = "ci"
 
+[[dependency]]
+name = "setuptools"
+version = ">=77,<85"
+license = "MIT"
+source_url = "https://pypi.org/project/setuptools/"
+purpose = "PEP 517 build backend and editable package installation"
+risk_level = "low"
+status = "direct-build-dependency"
+used_by = ["package build", "CI editable install"]
+scope = "base"
+
+[[dependency]]
+name = "pytest"
+version = ">=8,<10"
+license = "MIT"
+source_url = "https://pypi.org/project/pytest/"
+purpose = "Unit and smoke-test runner"
+risk_level = "low"
+status = "direct-development-dependency"
+used_by = ["local development", "GitHub Actions CI"]
+scope = "dev"
+
+[[dependency]]
+name = "ruff"
+version = ">=0.14,<1"
+license = "MIT"
+source_url = "https://pypi.org/project/ruff/"
+purpose = "Python linting and formatting"
+risk_level = "low"
+status = "direct-development-dependency"
+used_by = ["local development", "GitHub Actions CI"]
+scope = "dev"
+
+[[dependency]]
+name = "DocRes"
+version = "planned-reference; exact revision required before adoption"
+license = "MIT (upstream code only; weights and datasets require separate audit)"
+source_url = "https://github.com/ZZZHANG-jx/DocRes"
+purpose = "Potential future document-restoration research teacher/baseline reference"
+risk_level = "medium"
+status = "audit-gated-planned-reference; not installed or vendored"
+used_by = ["document restoration research boundary"]
+scope = "planned"
+
+[[dependency]]
+name = "PyTorch"
+version = ">=2.5,<3"
+license = "BSD-3-Clause"
+source_url = "https://github.com/pytorch/pytorch/blob/main/LICENSE"
+purpose = "Optional teacher/student model definition and tiny CPU pruning smoke path"
+risk_level = "medium"
+status = "optional-not-installed"
+used_by = ["optional torch training and distillation workflows"]
+scope = "optional"
+
+[[dependency]]
+name = "ONNX"
+version = ">=1.16,<2"
+license = "Apache-2.0"
+source_url = "https://github.com/onnx/onnx/blob/main/LICENSE"
+purpose = "Optional ONNX checker and graph validation for weight-bearing artifacts"
+risk_level = "low"
+status = "optional-not-installed"
+used_by = ["optional ONNX export validation workflow"]
+scope = "optional"
+
+[[dependency]]
+name = "ONNX Runtime"
+version = ">=1.20,<2"
+license = "MIT"
+source_url = "https://github.com/microsoft/onnxruntime/blob/main/LICENSE"
+purpose = "Optional ONNX dynamic int8 quantization and CPU inference smoke validation"
+risk_level = "medium"
+status = "optional-not-installed"
+used_by = ["optional quantization and runtime validation workflow"]
+scope = "optional"

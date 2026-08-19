@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"Wellfriend QuantizationConfig","type":"object","required":["schema_version","artifact","target_precision","calibration","unsupported_ops","validation_plan"],"additionalProperties":false}

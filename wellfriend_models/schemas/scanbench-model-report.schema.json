@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"Wellfriend ScanBenchModelReport","type":"object","required":["schema_version","repo_sha","artifact_id","artifact_hash","dataset_manifest_hash","device_profile","metrics","limitations","timestamp","environment","license_provenance_safety"],"additionalProperties":false}

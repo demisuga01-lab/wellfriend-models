@@ -1,4 +1,3 @@
-# Industrial research placeholder
+# Industrial model placeholder
 
-Reserved for inspection and anomaly models with traceable device/calibration metadata.
-
+This directory reserves optional future industrial inspection models, datasets, configurations, and metrics. It contains no deployed inspection logic or performance claim.

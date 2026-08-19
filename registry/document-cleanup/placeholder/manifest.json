@@ -1,0 +1,49 @@
+{
+  "architecture": "contract-only-placeholder",
+  "device_class": "unknown",
+  "domain": "document",
+  "dynamic_shape_support": false,
+  "evaluation_data_refs": [
+    "synthetic-only"
+  ],
+  "hashes_ref": "checksums.json",
+  "input_spec": {
+    "pixel_format": "Gray8",
+    "schema": "image[1,C,H,W]"
+  },
+  "intended_runtime": [
+    "future-wellfriend-perception-adapter"
+  ],
+  "license": {
+    "code": "Apache-2.0",
+    "notice": "No implementation or weights included."
+  },
+  "limitations": [
+    "placeholder only",
+    "no model weights",
+    "not production ready"
+  ],
+  "metrics_ref": "metrics.json",
+  "model_id": "wellfriend.document-cleanup.placeholder",
+  "model_name": "document-cleanup",
+  "output_spec": {
+    "schema": "task-specific-placeholder-output"
+  },
+  "postprocess_ref": "postprocess.json",
+  "precision": "not-applicable",
+  "preprocess_ref": "preprocess.json",
+  "production_ready": false,
+  "provenance": {
+    "source": "MP5 registry scaffold",
+    "weights": "not included"
+  },
+  "safety_notes": [
+    "production validation must reject this placeholder"
+  ],
+  "schema_version": 1,
+  "status": "placeholder",
+  "task": "document_cleanup_mask",
+  "training_data_refs": [],
+  "version": "0.1.0",
+  "weights_license": "not-included"
+}

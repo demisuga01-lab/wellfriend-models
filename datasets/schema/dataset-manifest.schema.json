@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "DatasetManifest",
+  "title": "WellfriendDatasetManifest",
   "type": "object",
-  "required": ["schema_version", "name", "version", "license", "samples", "splits", "provenance"],
+  "required": ["schema_version", "dataset_id", "name", "version", "description", "domain", "tasks", "license", "source_url", "citation", "allowed_uses", "redistribution", "provenance", "splits", "samples", "annotations", "transforms", "hashes", "warnings"],
   "properties": {
     "schema_version": {"const": 1},
     "name": {"type": "string"},
@@ -14,4 +14,3 @@
     "provenance": {"type": "object"}
   }
 }
-

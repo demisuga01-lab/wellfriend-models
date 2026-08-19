@@ -1,18 +1,36 @@
 # Wellfriend Models
 
-`wellfriend-models` is the Python research, training, evaluation, distillation, quantization, export, and artifact-registry repository for the Wellfriend ecosystem. It is not a production inference runtime, a dataset redistribution service, or a source of untracked model weights.
+`wellfriend-models` is the reproducible research, evaluation, export, and artifact-registry platform for the Wellfriend Open-Source Perception Ecosystem.
 
-The production engine is [`wellfriend-perception`](https://github.com/wellfriend/wellfriend-perception); this repository produces auditable exported artifacts that it can consume. [`wellfriend-scan`](https://github.com/wellfriend/wellfriend-scan) is the reference scanner product.
+It is not a production inference runtime, a dataset redistribution service, a source of untracked model weights, or a claim that any placeholder/baseline model is production quality. The Rust production engine is [wellfriend-perception](https://github.com/demisuga01-lab/wellfriend-perception); it consumes exported artifacts without importing arbitrary Python. [wellfriend-scan](https://github.com/demisuga01-lab/wellfriend-scan) is the reference scanner product.
 
-## Validate
+## Current status
+
+MP6 extends the MP5 platform with validated mobile device profiles, no-weight experimental low/mid/high artifact families, distillation/quantization/pruning evidence, tiling policies, promotion gates, OCR-aware evaluation hooks, and synthetic ScanBench model reports. No restricted data, third-party code, or model weights are included.
+
+## Install and validate
 
 ```powershell
-python tools/format_check.py
-python tools/lint.py
-python -m unittest discover -s tests -v
-python export/validate_artifact.py --allow-placeholder registry/document-detector
+python -m pip install -e ".[dev]"
+ruff format --check .
+ruff check .
+python -m pytest -q
+python -m wellfriend_models.datasets.validate path/to/dataset_manifest.json
+python -m wellfriend_models.registry.validate registry/document-detector/placeholder --allow-placeholder
+python -m wellfriend_models.registry.index registry/index.json --allow-placeholders
+python -m wellfriend_models.benchmarks.run_model_bench --config configs/benchmarks/document_mobile_smoke.json
 ```
 
-MP1 supplies schemas, validators, training/evaluation scaffolds, and placeholder registries only. It does not train, redistribute, or claim performance for models.
+## Baseline smoke flows
 
-The repository is Apache-2.0. Dependencies and model/dataset licenses require explicit provenance records before adoption.
+```powershell
+python -m wellfriend_models.training.train --config configs/smoke/document_segmentation_synthetic.json
+python -m wellfriend_models.training.train --config configs/smoke/document_corners_synthetic.json
+python -m wellfriend_models.training.train --config configs/smoke/document_quality_synthetic.json
+python -m wellfriend_models.evaluation.evaluate --config configs/smoke/document_segmentation_synthetic.json --write-predictions-manifest
+python -m wellfriend_models.export.export --config configs/export/document_detector_baseline.json
+python -m wellfriend_models.benchmarks.run --smoke
+python -m wellfriend_models.benchmarks.run_model_bench --config configs/benchmarks/document_mobile_smoke.json
+```
+
+The repository is Apache-2.0. Direct dependencies and planned external references are recorded in [`third_party/dependency-register.toml`](third_party/dependency-register.toml); unknown, non-commercial, research-only, GPL-family, or unclear licenses are blocked from production artifacts.

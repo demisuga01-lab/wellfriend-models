@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"Wellfriend DistillationConfig","type":"object","required":["schema_version","experiment_id","task","teacher","student","dataset_manifest_hash","losses","reproducibility"],"additionalProperties":false}

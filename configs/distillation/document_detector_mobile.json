@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "experiment_id": "document-detector-mobile-distillation-smoke",
+  "task": "document_segmentation",
+  "teacher": {"type": "classical_processor", "id": "document-segmentation-baseline"},
+  "student": {"model_id": "wellfriend.document-detector-mobile.low.experimental", "task": "document_segmentation"},
+  "dataset_manifest_hash": "def487bc000bdbee63174411a77944f411e554b0bd7a638a0d1958830f12c3e2",
+  "losses": ["binary_cross_entropy", "dice"],
+  "reproducibility": {"seed": 601, "synthetic_only": true}
+}

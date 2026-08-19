@@ -1,0 +1,1 @@
+{"schema_version":1,"device_class":"server","precision":["fp32","fp16","int8"],"max_model_size_mb":512,"max_latency_ms_placeholder":200,"max_memory_mb_placeholder":4096,"input_resolution_policy":"native","tiling_policy":"no_tiling","runtime_targets":["server"],"fallback_strategy":"server_if_allowed"}

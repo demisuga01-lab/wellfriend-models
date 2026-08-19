@@ -1,0 +1,1 @@
+{"schema_version":1,"device_class":"mid","precision":["int8","fp16","fp32"],"max_model_size_mb":32,"max_latency_ms_placeholder":120,"max_memory_mb_placeholder":320,"input_resolution_policy":"pyramid","tiling_policy":"pyramid_lowres_predict_highres_apply","runtime_targets":["cpu","xnnpack","nnapi"],"fallback_strategy":"light_model"}
