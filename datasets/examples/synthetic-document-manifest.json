@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "dataset_id": "wellfriend.synthetic-document-smoke",
+  "name": "Wellfriend synthetic document smoke fixture",
+  "version": "1.0.0",
+  "description": "One generated-on-demand fixture for contract validation; no image is redistributed.",
+  "domain": "document",
+  "tasks": ["document_segmentation", "document_corner_regression", "document_quality"],
+  "license": {
+    "name": "Apache-2.0",
+    "status": "synthetic",
+    "reference": "docs/dataset-policy.md"
+  },
+  "source_url": "https://github.com/demisuga01-lab/wellfriend-models",
+  "citation": "Wellfriend Models synthetic document generator, seed 101.",
+  "allowed_uses": ["tests", "smoke experiments", "contract validation"],
+  "redistribution": "manifest only; generate fixture locally",
+  "provenance": {
+    "generator": "SyntheticDocumentGenerator",
+    "seed": 101,
+    "case": "perspective_quadrilateral"
+  },
+  "splits": {"smoke": {"seed": 101, "selection": "one deterministic fixture"}},
+  "samples": [
+    {
+      "sample_id": "synthetic-perspective-quadrilateral-000",
+      "relative_path": "generated/synthetic-perspective-quadrilateral-000.pgm",
+      "sha256": "aa91437c729cbc8b1ea7a4a12d4223179163d8f2df5cc8768188bb8cc6913472",
+      "width": 48,
+      "height": 36,
+      "channels": 1,
+      "pixel_format": "Gray8",
+      "domain": "document",
+      "split": "smoke",
+      "annotations": {
+        "quad": "generated-on-demand",
+        "mask": "generated-on-demand",
+        "keypoints": "generated-on-demand",
+        "quality_labels": "generated-on-demand"
+      },
+      "source": "SyntheticDocumentGenerator(seed=101)",
+      "license_ref": "Apache-2.0"
+    }
+  ],
+  "annotations": ["quad", "mask", "keypoints", "quality_labels"],
+  "transforms": [],
+  "hashes": {"sample_generation": "seed=101,width=48,height=36"},
+  "warnings": ["No image bytes are committed; regenerate locally before file-level validation."]
+}

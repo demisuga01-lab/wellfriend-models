@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"Postprocess","type":"object","required":["schema_version","steps"],"properties":{"schema_version":{"const":1},"steps":{"type":"array"}}}

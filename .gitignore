@@ -2,6 +2,8 @@ __pycache__/
 *.py[cod]
 .venv/
 artifacts/
+experiments/
+benchmark-results/
+*.egg-info/
 datasets/local/
 datasets/private/
-

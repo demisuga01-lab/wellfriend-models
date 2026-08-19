@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "experiment_id": "smoke-document-segmentation",
+  "seed": 101,
+  "task": "document_segmentation",
+  "model": {"family": "document-detector", "implementation": "cpu_threshold_baseline"},
+  "dataset": {"kind": "synthetic", "width": 48, "height": 36, "count_per_case": 1},
+  "splits": {"train": 1.0}, "transforms": [], "losses": ["binary_cross_entropy"],
+  "optimizer": {"name": "not_applicable"}, "scheduler": {"name": "not_applicable"},
+  "batch_size": 1, "epochs": 1, "device": "cpu", "precision": "fp32",
+  "logging": {"output_dir": "experiments"}, "checkpoints": {"enabled": false},
+  "export": {"family": "document-detector", "output_dir": "artifacts/smoke-document-detector"},
+  "reproducibility": {"deterministic": true, "synthetic_only": true}
+}

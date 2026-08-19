@@ -8,6 +8,8 @@ source_url = "https://github.com/actions/checkout"
 purpose = "GitHub Actions checkout"
 risk_level = "low"
 status = "ci-only"
+used_by = ["GitHub Actions CI"]
+scope = "ci"
 
 [[dependency]]
 name = "actions/setup-python"
@@ -17,4 +19,38 @@ source_url = "https://github.com/actions/setup-python"
 purpose = "GitHub Actions Python setup"
 risk_level = "low"
 status = "ci-only"
+used_by = ["GitHub Actions CI"]
+scope = "ci"
 
+[[dependency]]
+name = "setuptools"
+version = ">=77,<85"
+license = "MIT"
+source_url = "https://pypi.org/project/setuptools/"
+purpose = "PEP 517 build backend and editable package installation"
+risk_level = "low"
+status = "direct-build-dependency"
+used_by = ["package build", "CI editable install"]
+scope = "base"
+
+[[dependency]]
+name = "pytest"
+version = ">=8,<10"
+license = "MIT"
+source_url = "https://pypi.org/project/pytest/"
+purpose = "Unit and smoke-test runner"
+risk_level = "low"
+status = "direct-development-dependency"
+used_by = ["local development", "GitHub Actions CI"]
+scope = "dev"
+
+[[dependency]]
+name = "ruff"
+version = ">=0.14,<1"
+license = "MIT"
+source_url = "https://pypi.org/project/ruff/"
+purpose = "Python linting and formatting"
+risk_level = "low"
+status = "direct-development-dependency"
+used_by = ["local development", "GitHub Actions CI"]
+scope = "dev"

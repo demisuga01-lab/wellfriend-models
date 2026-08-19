@@ -3,14 +3,5 @@
   "title": "WellfriendDatasetManifest",
   "type": "object",
   "required": ["schema_version", "dataset_id", "name", "version", "description", "domain", "tasks", "license", "source_url", "citation", "allowed_uses", "redistribution", "provenance", "splits", "samples", "annotations", "transforms", "hashes", "warnings"],
-  "properties": {
-    "schema_version": {"const": 1},
-    "name": {"type": "string"},
-    "version": {"type": "string"},
-    "license": {"type": "object"},
-    "samples": {"type": "array"},
-    "splits": {"type": "object"},
-    "transforms": {"type": "array"},
-    "provenance": {"type": "object"}
-  }
+  "properties": {"schema_version": {"const": 1}, "dataset_id": {"type": "string"}, "samples": {"type": "array"}}
 }

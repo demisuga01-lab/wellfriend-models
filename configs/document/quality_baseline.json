@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "experiment_id": "document-quality-baseline-v1",
+  "seed": 23,
+  "task": "document_quality",
+  "model": {"family": "document-quality", "implementation": "cpu_statistics_baseline"},
+  "dataset": {"kind": "synthetic", "width": 96, "height": 72, "count_per_case": 2},
+  "splits": {"train": 0.8, "validation": 0.2},
+  "transforms": [],
+  "losses": ["quality_regression_loss"],
+  "optimizer": {"name": "not_applicable"},
+  "scheduler": {"name": "not_applicable"},
+  "batch_size": 4,
+  "epochs": 1,
+  "device": "cpu",
+  "precision": "fp32",
+  "logging": {"output_dir": "experiments"},
+  "checkpoints": {"enabled": false},
+  "export": {"family": "document-quality", "output_dir": "artifacts/document-quality-baseline"},
+  "reproducibility": {"deterministic": true, "synthetic_only": true}
+}
