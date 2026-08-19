@@ -2,6 +2,7 @@
 
 from .contracts import (
     ANNOTATION_TYPES,
+    ARTIFACT_STATUSES,
     MODEL_TASKS,
     ContractError,
     validate_dataset_manifest,
@@ -11,6 +12,7 @@ from .contracts import (
 
 __all__ = [
     "ANNOTATION_TYPES",
+    "ARTIFACT_STATUSES",
     "MODEL_TASKS",
     "ContractError",
     "validate_dataset_manifest",

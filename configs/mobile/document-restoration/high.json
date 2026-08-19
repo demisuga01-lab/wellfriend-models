@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "family": "document-restoration-mobile",
+  "variant": "high",
+  "task": "document_restoration",
+  "architecture": "experimental-document-restoration-mobile-high-contract",
+  "input_size": [
+    768,
+    768
+  ],
+  "output_schema": "task-specific-placeholder-output",
+  "precision_target": "fp16",
+  "device_profile": "configs/device-profiles/high.json",
+  "export_target": "onnx-optional",
+  "expected_runtime": [
+    "cpu",
+    "xnnpack"
+  ],
+  "tiling_policy": {
+    "mode": "pyramid_lowres_predict_highres_apply",
+    "input_resolution": [
+      768,
+      768
+    ],
+    "max_resolution": [
+      2048,
+      2048
+    ],
+    "tile_size": [
+      768,
+      768
+    ],
+    "overlap": 0,
+    "blend_policy": "none",
+    "coordinate_remap_policy": "pyramid_scale"
+  },
+  "training_smoke": {
+    "dataset": "synthetic",
+    "epochs": 1
+  },
+  "evaluation": {
+    "dataset": "synthetic",
+    "metrics": "task-default"
+  },
+  "export": {
+    "artifact_path": "registry/document-restoration/high-mobile-experimental"
+  },
+  "quantization": {
+    "target": "fp16",
+    "metadata_only": true
+  },
+  "benchmark": {
+    "config": "configs/benchmarks/document_mobile_smoke.json"
+  },
+  "limitations": [
+    "synthetic only",
+    "no weights included",
+    "not production ready"
+  ],
+  "status": "experimental"
+}

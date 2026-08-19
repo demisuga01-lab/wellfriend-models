@@ -4,6 +4,7 @@ __pycache__/
 artifacts/
 experiments/
 benchmark-results/
+benchmarks/out/
 *.egg-info/
 datasets/local/
 datasets/private/

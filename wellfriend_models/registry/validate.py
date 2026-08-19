@@ -13,10 +13,13 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("artifact", type=str)
     parser.add_argument("--allow-placeholder", action="store_true")
+    parser.add_argument("--allow-nonproduction", action="store_true")
     arguments = parser.parse_args()
     try:
         result = validate_artifact_directory(
-            arguments.artifact, allow_placeholder=arguments.allow_placeholder
+            arguments.artifact,
+            allow_placeholder=arguments.allow_placeholder,
+            allow_nonproduction=arguments.allow_nonproduction,
         )
     except ContractError as error:
         parser.error(str(error))

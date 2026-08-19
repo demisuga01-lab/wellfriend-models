@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "family": "document-cleanup-mobile",
+  "variant": "low",
+  "task": "document_cleanup_mask",
+  "architecture": "experimental-document-cleanup-mobile-low-contract",
+  "input_size": [
+    256,
+    256
+  ],
+  "output_schema": "task-specific-placeholder-output",
+  "precision_target": "int8",
+  "device_profile": "configs/device-profiles/low.json",
+  "export_target": "onnx-optional",
+  "expected_runtime": [
+    "cpu",
+    "xnnpack"
+  ],
+  "tiling_policy": {
+    "mode": "overlap_tile",
+    "input_resolution": [
+      256,
+      256
+    ],
+    "max_resolution": [
+      2048,
+      2048
+    ],
+    "tile_size": [
+      256,
+      256
+    ],
+    "overlap": 32,
+    "blend_policy": "feather",
+    "coordinate_remap_policy": "tile_offset"
+  },
+  "training_smoke": {
+    "dataset": "synthetic",
+    "epochs": 1
+  },
+  "evaluation": {
+    "dataset": "synthetic",
+    "metrics": "task-default"
+  },
+  "export": {
+    "artifact_path": "registry/document-cleanup/low-mobile-experimental"
+  },
+  "quantization": {
+    "target": "int8",
+    "metadata_only": true
+  },
+  "benchmark": {
+    "config": "configs/benchmarks/document_mobile_smoke.json"
+  },
+  "limitations": [
+    "synthetic only",
+    "no weights included",
+    "not production ready"
+  ],
+  "status": "experimental"
+}

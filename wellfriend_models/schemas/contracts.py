@@ -17,6 +17,18 @@ MODEL_TASKS = frozenset(
         "layout_detection",
     }
 )
+ARTIFACT_STATUSES = frozenset(
+    {
+        "placeholder",
+        "experimental",
+        "research",
+        "candidate",
+        "mobile_candidate",
+        "production_ready",
+        "deprecated",
+        "blocked",
+    }
+)
 ANNOTATION_TYPES = frozenset(
     {
         "quad",
@@ -109,6 +121,18 @@ REQUIRED_MANIFEST_FIELDS = frozenset(
         "limitations",
         "safety_notes",
         "provenance",
+    }
+)
+OPTIONAL_MANIFEST_FIELDS = frozenset(
+    {
+        "weights_included",
+        "mobile_profile",
+        "tiling_policy",
+        "promotion_evidence",
+        "quantization_ref",
+        "pruning_ref",
+        "distillation_ref",
+        "scanbench_ref",
     }
 )
 REQUIRED_EXPERIMENT_FIELDS = frozenset(
@@ -228,7 +252,11 @@ def validate_model_components(
         raise ContractError(f"artifact component documents missing: {', '.join(missing)}")
     manifest = _require_mapping(components["manifest"], "artifact manifest")
     _require_fields(manifest, REQUIRED_MANIFEST_FIELDS, "artifact manifest")
-    _reject_unknown_fields(manifest, REQUIRED_MANIFEST_FIELDS, "artifact manifest")
+    _reject_unknown_fields(
+        manifest,
+        REQUIRED_MANIFEST_FIELDS.union(OPTIONAL_MANIFEST_FIELDS),
+        "artifact manifest",
+    )
     if manifest["schema_version"] != 1:
         raise ContractError("unsupported model manifest schema_version")
     if manifest["task"] not in MODEL_TASKS:
@@ -243,15 +271,29 @@ def validate_model_components(
             raise ContractError(f"{spec_name} requires schema")
     status = manifest["status"]
     ready = manifest["production_ready"]
+    if status not in ARTIFACT_STATUSES:
+        raise ContractError("artifact status is unsupported")
+    if not isinstance(ready, bool):
+        raise ContractError("production_ready must be a boolean")
+    weights_included = manifest.get("weights_included", status == "production_ready")
+    if not isinstance(weights_included, bool):
+        raise ContractError("weights_included must be a boolean when declared")
     if status == "placeholder":
+        if ready or weights_included:
+            raise ContractError(
+                "placeholder artifact cannot be production_ready or include weights"
+            )
+    elif status in {"experimental", "research", "candidate", "mobile_candidate"}:
         if ready:
-            raise ContractError("placeholder artifact cannot be production_ready")
-        if production:
-            raise ContractError("placeholder artifact is not a production artifact")
-    elif status != "released":
-        raise ContractError("artifact status must be placeholder or released")
-    elif not isinstance(ready, bool) or not ready:
-        raise ContractError("released artifact must set production_ready true")
+            raise ContractError("non-production artifact cannot set production_ready true")
+    elif status in {"deprecated", "blocked"} and ready:
+        raise ContractError("deprecated or blocked artifact cannot be production_ready")
+    elif status == "production_ready":
+        _validate_production_readiness(manifest, components, weights_included)
+    if status == "mobile_candidate":
+        _validate_mobile_candidate(manifest, components)
+    if production and status != "production_ready":
+        raise ContractError("non-production artifact requires explicit non-production validation")
     if not isinstance(components["preprocess"].get("steps"), list):
         raise ContractError("preprocess steps must be a list")
     if not isinstance(components["postprocess"].get("steps"), list):
@@ -262,6 +304,53 @@ def validate_model_components(
         raise ContractError("metrics metrics must be an object")
     if not isinstance(components["checksums"].get("files"), Mapping):
         raise ContractError("checksums files must be an object")
+
+
+def _validate_mobile_candidate(
+    manifest: Mapping[str, Any], components: Mapping[str, Mapping[str, Any]]
+) -> None:
+    if manifest.get("device_class") not in {"low", "mid", "high"}:
+        raise ContractError("mobile_candidate requires low, mid, or high device_class")
+    if not isinstance(manifest.get("mobile_profile"), Mapping):
+        raise ContractError("mobile_candidate requires a mobile_profile")
+    if not isinstance(manifest.get("tiling_policy"), Mapping):
+        raise ContractError("mobile_candidate requires a tiling_policy")
+    evidence = manifest.get("promotion_evidence")
+    if not isinstance(evidence, Mapping):
+        raise ContractError("mobile_candidate requires promotion_evidence")
+    required_evidence = {"export_validation", "size_report", "runtime_plan", "metrics"}
+    if not required_evidence.issubset(evidence):
+        raise ContractError("mobile_candidate promotion evidence is incomplete")
+    if not components["metrics"].get("metrics"):
+        raise ContractError("mobile_candidate requires non-empty metrics")
+
+
+def _validate_production_readiness(
+    manifest: Mapping[str, Any], components: Mapping[str, Mapping[str, Any]], weights_included: bool
+) -> None:
+    if not manifest["production_ready"] or not weights_included:
+        raise ContractError("production_ready artifact requires explicit included weights")
+    if not manifest["training_data_refs"] or not manifest["evaluation_data_refs"]:
+        raise ContractError(
+            "production_ready artifact requires training and evaluation data references"
+        )
+    if manifest["weights_license"] in {
+        "not-included",
+        "unknown",
+        "research-only",
+        "non-commercial",
+    }:
+        raise ContractError("production_ready artifact has an unsafe weights license")
+    if not components["metrics"].get("metrics"):
+        raise ContractError("production_ready artifact requires metrics")
+    evidence = manifest.get("promotion_evidence")
+    if not isinstance(evidence, Mapping) or not {
+        "export_validation",
+        "runtime_validation",
+        "provenance_validation",
+        "safety_review",
+    }.issubset(evidence):
+        raise ContractError("production_ready artifact lacks promotion evidence")
 
 
 def validate_experiment_config(config: Mapping[str, Any]) -> None:

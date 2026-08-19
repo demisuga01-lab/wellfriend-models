@@ -11,7 +11,7 @@ from wellfriend_models.schemas import ContractError
 
 
 def validate_registry_index(
-    path: Path, *, allow_placeholders: bool = True
+    path: Path, *, allow_placeholders: bool = True, allow_nonproduction: bool = True
 ) -> list[dict[str, object]]:
     """Validate index shape and resolve each relative artifact path safely."""
     try:
@@ -31,7 +31,11 @@ def validate_registry_index(
         target = (path.parent / entry["path"]).resolve()
         if path.parent.resolve() not in target.parents:
             raise ContractError("registry entry path escapes registry root")
-        result = validate_artifact_directory(target, allow_placeholder=allow_placeholders)
+        result = validate_artifact_directory(
+            target,
+            allow_placeholder=allow_placeholders,
+            allow_nonproduction=allow_nonproduction,
+        )
         if result["status"] == "placeholder" and entry.get("production_ready"):
             raise ContractError("registry index cannot mark a placeholder entry production-ready")
         results.append(result)
@@ -43,10 +47,13 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("index", type=Path)
     parser.add_argument("--allow-placeholders", action="store_true")
+    parser.add_argument("--allow-nonproduction", action="store_true")
     arguments = parser.parse_args()
     try:
         results = validate_registry_index(
-            arguments.index, allow_placeholders=arguments.allow_placeholders
+            arguments.index,
+            allow_placeholders=arguments.allow_placeholders,
+            allow_nonproduction=arguments.allow_nonproduction or arguments.allow_placeholders,
         )
     except ContractError as error:
         parser.error(str(error))

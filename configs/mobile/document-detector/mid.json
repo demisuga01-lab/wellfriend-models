@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "family": "document-detector-mobile",
+  "variant": "mid",
+  "task": "document_segmentation",
+  "architecture": "experimental-document-detector-mobile-mid-contract",
+  "input_size": [
+    512,
+    512
+  ],
+  "output_schema": "task-specific-placeholder-output",
+  "precision_target": "fp16",
+  "device_profile": "configs/device-profiles/mid.json",
+  "export_target": "onnx-optional",
+  "expected_runtime": [
+    "cpu",
+    "xnnpack"
+  ],
+  "tiling_policy": {
+    "mode": "pyramid_lowres_predict_highres_apply",
+    "input_resolution": [
+      512,
+      512
+    ],
+    "max_resolution": [
+      2048,
+      2048
+    ],
+    "tile_size": [
+      512,
+      512
+    ],
+    "overlap": 0,
+    "blend_policy": "none",
+    "coordinate_remap_policy": "pyramid_scale"
+  },
+  "training_smoke": {
+    "dataset": "synthetic",
+    "epochs": 1
+  },
+  "evaluation": {
+    "dataset": "synthetic",
+    "metrics": "task-default"
+  },
+  "export": {
+    "artifact_path": "registry/document-detector/mid-mobile-experimental"
+  },
+  "quantization": {
+    "target": "fp16",
+    "metadata_only": true
+  },
+  "benchmark": {
+    "config": "configs/benchmarks/document_mobile_smoke.json"
+  },
+  "limitations": [
+    "synthetic only",
+    "no weights included",
+    "not production ready"
+  ],
+  "status": "experimental"
+}
