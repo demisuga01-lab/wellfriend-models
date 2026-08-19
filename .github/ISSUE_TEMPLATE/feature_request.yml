@@ -1,0 +1,5 @@
+name: Feature request
+description: Bounded research-platform capability
+body:
+  - type: textarea
+    attributes: { label: Problem and artifact/dataset impact }

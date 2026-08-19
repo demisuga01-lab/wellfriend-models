@@ -1,0 +1,5 @@
+name: Bug report
+description: Reproducible governance/tooling defect
+body:
+  - type: textarea
+    attributes: { label: Reproduction, version, and impact }
