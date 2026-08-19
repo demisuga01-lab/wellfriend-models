@@ -54,3 +54,14 @@ risk_level = "low"
 status = "direct-development-dependency"
 used_by = ["local development", "GitHub Actions CI"]
 scope = "dev"
+
+[[dependency]]
+name = "DocRes"
+version = "planned-reference; exact revision required before adoption"
+license = "MIT (upstream code only; weights and datasets require separate audit)"
+source_url = "https://github.com/ZZZHANG-jx/DocRes"
+purpose = "Potential future document-restoration research teacher/baseline reference"
+risk_level = "medium"
+status = "audit-gated-planned-reference; not installed or vendored"
+used_by = ["document restoration research boundary"]
+scope = "planned"
