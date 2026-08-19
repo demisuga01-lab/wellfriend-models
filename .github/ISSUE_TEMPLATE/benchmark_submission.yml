@@ -1,0 +1,5 @@
+name: Benchmark submission
+description: Submit reproducible synthetic or real benchmark evidence
+body:
+  - type: textarea
+    attributes: { label: Commands, dataset hash, hardware, metrics, and limitations }

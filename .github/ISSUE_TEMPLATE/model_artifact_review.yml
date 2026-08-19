@@ -1,0 +1,5 @@
+name: Model artifact review
+description: Review an artifact before registry/promotion use
+body:
+  - type: textarea
+    attributes: { label: Manifest, hashes, license, provenance, metrics, and runtime evidence }
