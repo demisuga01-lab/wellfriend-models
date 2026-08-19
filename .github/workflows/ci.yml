@@ -15,6 +15,7 @@ jobs:
       - run: ruff check .
       - run: python -m pytest -q
       - run: python tools/check_dependency_register.py
+      - run: python tools/check_ecosystem_compatibility.py
       - run: python -m wellfriend_models.datasets.validate datasets/examples/synthetic-document-manifest.json
       - run: python -m wellfriend_models.registry.validate registry/document-detector/placeholder --allow-placeholder
       - run: python -m wellfriend_models.registry.index registry/index.json --allow-placeholders --allow-nonproduction
