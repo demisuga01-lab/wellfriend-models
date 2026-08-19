@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "entries": [
+    {"family": "document-detector", "path": "document-detector/placeholder", "production_ready": false},
+    {"family": "document-corners", "path": "document-corners/placeholder", "production_ready": false},
+    {"family": "document-quality", "path": "document-quality/placeholder", "production_ready": false},
+    {"family": "document-restoration", "path": "document-restoration/placeholder", "production_ready": false},
+    {"family": "document-cleanup", "path": "document-cleanup/placeholder", "production_ready": false},
+    {"family": "ocr", "path": "ocr/placeholder", "production_ready": false}
+  ]
+}

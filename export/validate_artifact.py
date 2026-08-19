@@ -1,14 +1,13 @@
-"""Validate a production artifact directory or an explicitly permitted registry placeholder."""
+"""Compatibility wrapper for the package-level artifact validator."""
 
 from __future__ import annotations
 
 import argparse
-from pathlib import Path
 import sys
+from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-
-from registry.artifact_schema import ContractError, validate_artifact_directory
+from wellfriend_models.registry.artifact import validate_artifact_directory
+from wellfriend_models.schemas import ContractError
 
 
 def main() -> int:
