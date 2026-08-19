@@ -34,7 +34,7 @@ def _checksum(path: Path) -> str:
 
 
 def validate_artifact_directory(
-    directory: Path, *, allow_placeholder: bool = False
+    directory: Path, *, allow_placeholder: bool = False, allow_nonproduction: bool = False
 ) -> dict[str, Any]:
     """Validate structure, contract documents, and listed checksums for one artifact directory."""
     directory = Path(directory)
@@ -45,7 +45,8 @@ def validate_artifact_directory(
     }
     manifest = components["manifest"]
     placeholder = manifest.get("status") == "placeholder"
-    validate_model_components(components, production=not allow_placeholder)
+    nonproduction = allow_placeholder or allow_nonproduction
+    validate_model_components(components, production=not nonproduction)
     if placeholder and not allow_placeholder:
         raise ContractError("placeholder artifact requires explicit --allow-placeholder validation")
     if not (directory / "LICENSES" / "README.md").is_file():
@@ -53,8 +54,11 @@ def validate_artifact_directory(
     if not (directory / "README.md").is_file():
         raise ContractError("artifact requires README.md")
     model_path = directory / "model.onnx"
-    if not placeholder and not model_path.is_file():
-        raise ContractError("released artifact requires model.onnx")
+    if (
+        manifest.get("weights_included", manifest.get("status") == "production_ready")
+        and not model_path.is_file()
+    ):
+        raise ContractError("weight-bearing artifact requires model.onnx")
     for relative_path, expected in components["checksums"]["files"].items():
         path = directory / relative_path
         if not path.is_file():
@@ -133,6 +137,72 @@ def write_placeholder_artifact(directory: Path, *, family: str, task: str) -> Pa
     )
     (directory / "README.md").write_text(
         description,
+        encoding="utf-8",
+    )
+    return directory
+
+
+def write_mobile_experimental_artifact(
+    directory: Path,
+    *,
+    family: str,
+    task: str,
+    variant: str,
+    profile: dict[str, Any],
+    tiling_policy: dict[str, Any],
+) -> Path:
+    """Create an experimental, no-weight mobile registry entry with auditable metadata."""
+    directory = Path(directory)
+    directory.mkdir(parents=True, exist_ok=True)
+    documents = _placeholder_documents(family=family, task=task)
+    manifest = documents["manifest"]
+    manifest.update(
+        {
+            "model_id": f"wellfriend.{family}.{variant}.experimental",
+            "model_name": f"{family}-{variant}",
+            "version": "0.1.0-experimental",
+            "status": "experimental",
+            "architecture": f"mobile-contract-{variant}",
+            "device_class": variant,
+            "precision": profile["precision"][0],
+            "weights_included": False,
+            "mobile_profile": profile,
+            "tiling_policy": tiling_policy,
+            "promotion_evidence": {
+                "export_validation": "metadata-only",
+                "size_report": "no weights included",
+                "runtime_plan": profile["runtime_targets"],
+                "metrics": "synthetic baseline pending ScanBench run",
+            },
+            "limitations": [
+                "experimental metadata only",
+                "synthetic baseline only",
+                "no model weights",
+                "not production ready",
+            ],
+        }
+    )
+    documents["metrics"] = {
+        "schema_version": 1,
+        "metrics": {"synthetic_smoke": {"status": "not-yet-measured"}},
+        "status": "experimental",
+        "data": "synthetic-only",
+    }
+    for component, filename in COMPONENT_FILES.items():
+        (directory / filename).write_text(
+            json.dumps(documents[component], indent=2, sort_keys=True) + "\n", encoding="utf-8"
+        )
+    licenses = directory / "LICENSES"
+    licenses.mkdir(exist_ok=True)
+    (licenses / "README.md").write_text(
+        "No model weights or third-party code are included in this experimental artifact.\n",
+        encoding="utf-8",
+    )
+    (directory / "README.md").write_text(
+        "# Experimental mobile artifact\n\n"
+        "This is metadata-only experimental evidence for a device profile. "
+        "It includes no weights and "
+        "cannot be promoted to production.\n",
         encoding="utf-8",
     )
     return directory

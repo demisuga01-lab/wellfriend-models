@@ -1,0 +1,99 @@
+{
+  "architecture": "mobile-contract-high",
+  "device_class": "high",
+  "domain": "document",
+  "dynamic_shape_support": false,
+  "evaluation_data_refs": [
+    "synthetic-only"
+  ],
+  "hashes_ref": "checksums.json",
+  "input_spec": {
+    "pixel_format": "Gray8",
+    "schema": "image[1,C,H,W]"
+  },
+  "intended_runtime": [
+    "future-wellfriend-perception-adapter"
+  ],
+  "license": {
+    "code": "Apache-2.0",
+    "notice": "No implementation or weights included."
+  },
+  "limitations": [
+    "experimental metadata only",
+    "synthetic baseline only",
+    "no model weights",
+    "not production ready"
+  ],
+  "metrics_ref": "metrics.json",
+  "mobile_profile": {
+    "device_class": "high",
+    "fallback_strategy": "light_model",
+    "input_resolution_policy": "native",
+    "max_latency_ms_placeholder": 80,
+    "max_memory_mb_placeholder": 768,
+    "max_model_size_mb": 96,
+    "precision": [
+      "fp16",
+      "fp32",
+      "int8"
+    ],
+    "runtime_targets": [
+      "cpu",
+      "nnapi",
+      "coreml"
+    ],
+    "schema_version": 1,
+    "tiling_policy": "no_tiling"
+  },
+  "model_id": "wellfriend.document-corners-mobile.high.experimental",
+  "model_name": "document-corners-mobile-high",
+  "output_spec": {
+    "schema": "task-specific-placeholder-output"
+  },
+  "postprocess_ref": "postprocess.json",
+  "precision": "fp16",
+  "preprocess_ref": "preprocess.json",
+  "production_ready": false,
+  "promotion_evidence": {
+    "export_validation": "metadata-only",
+    "metrics": "synthetic baseline pending ScanBench run",
+    "runtime_plan": [
+      "cpu",
+      "nnapi",
+      "coreml"
+    ],
+    "size_report": "no weights included"
+  },
+  "provenance": {
+    "source": "MP5 registry scaffold",
+    "weights": "not included"
+  },
+  "safety_notes": [
+    "production validation must reject this placeholder"
+  ],
+  "schema_version": 1,
+  "status": "experimental",
+  "task": "document_corner_regression",
+  "tiling_policy": {
+    "blend_policy": "none",
+    "coordinate_remap_policy": "pyramid_scale",
+    "input_resolution": [
+      768,
+      768
+    ],
+    "max_resolution": [
+      2048,
+      2048
+    ],
+    "mode": "pyramid_lowres_predict_highres_apply",
+    "overlap": 0,
+    "tile_size": [
+      768,
+      768
+    ]
+  },
+  "training_data_refs": [],
+  "version": "0.1.0-experimental",
+  "weights_included": false,
+  "weights_license": "not-included"
+}

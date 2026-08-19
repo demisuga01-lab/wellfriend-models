@@ -1,0 +1,10 @@
+{
+  "data": "synthetic-only",
+  "metrics": {
+    "synthetic_smoke": {
+      "status": "not-yet-measured"
+    }
+  },
+  "schema_version": 1,
+  "status": "experimental"
+}

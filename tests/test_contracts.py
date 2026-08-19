@@ -204,7 +204,7 @@ class ArtifactRegistryTests(unittest.TestCase):
 
     def test_registry_index_and_placeholders_validate(self) -> None:
         results = validate_registry_index(ROOT / "registry" / "index.json")
-        self.assertEqual(len(results), 6)
+        self.assertEqual(len(results), 21)
         self.assertTrue(all(result["production_ready"] is False for result in results))
 
 

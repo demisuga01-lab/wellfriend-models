@@ -17,5 +17,6 @@ jobs:
       - run: python tools/check_dependency_register.py
       - run: python -m wellfriend_models.datasets.validate datasets/examples/synthetic-document-manifest.json
       - run: python -m wellfriend_models.registry.validate registry/document-detector/placeholder --allow-placeholder
-      - run: python -m wellfriend_models.registry.index registry/index.json --allow-placeholders
+      - run: python -m wellfriend_models.registry.index registry/index.json --allow-placeholders --allow-nonproduction
       - run: python -m wellfriend_models.benchmarks.run --smoke
+      - run: python -m wellfriend_models.benchmarks.run_model_bench --config configs/benchmarks/document_mobile_smoke.json --output-dir ${{ runner.temp }}/scanbench-models

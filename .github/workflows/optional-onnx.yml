@@ -1,0 +1,19 @@
+name: Optional ONNX validation
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  optional-onnx:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install -e ".[dev,onnx,quantization]"
+      - run: python -c "import onnx, onnxruntime; print('optional ONNX dependencies available')"
+      - run: python -m pytest -q

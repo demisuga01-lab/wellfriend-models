@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "artifact": {"model_id": "wellfriend.document-detector-mobile.low.experimental"},
+  "mode": "unstructured",
+  "target_sparsity": 0.25,
+  "metric_guard": {"metric": "iou", "maximum_delta": 0.02}
+}

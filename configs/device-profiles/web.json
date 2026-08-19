@@ -1,0 +1,1 @@
+{"schema_version":1,"device_class":"web","precision":["fp16","int8"],"max_model_size_mb":24,"max_latency_ms_placeholder":250,"max_memory_mb_placeholder":256,"input_resolution_policy":"downsample_or_tile","tiling_policy":"fixed_tile","runtime_targets":["wasm","webgpu"],"fallback_strategy":"classical_or_light_model"}

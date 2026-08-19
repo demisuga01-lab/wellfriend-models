@@ -1,11 +1,110 @@
 {
   "schema_version": 1,
   "entries": [
-    {"family": "document-detector", "path": "document-detector/placeholder", "production_ready": false},
-    {"family": "document-corners", "path": "document-corners/placeholder", "production_ready": false},
-    {"family": "document-quality", "path": "document-quality/placeholder", "production_ready": false},
-    {"family": "document-restoration", "path": "document-restoration/placeholder", "production_ready": false},
-    {"family": "document-cleanup", "path": "document-cleanup/placeholder", "production_ready": false},
-    {"family": "ocr", "path": "ocr/placeholder", "production_ready": false}
+    {
+      "family": "document-detector",
+      "path": "document-detector/placeholder",
+      "production_ready": false
+    },
+    {
+      "family": "document-corners",
+      "path": "document-corners/placeholder",
+      "production_ready": false
+    },
+    {
+      "family": "document-quality",
+      "path": "document-quality/placeholder",
+      "production_ready": false
+    },
+    {
+      "family": "document-cleanup",
+      "path": "document-cleanup/placeholder",
+      "production_ready": false
+    },
+    {
+      "family": "document-restoration",
+      "path": "document-restoration/placeholder",
+      "production_ready": false
+    },
+    {
+      "family": "ocr",
+      "path": "ocr/placeholder",
+      "production_ready": false
+    },
+    {
+      "family": "document-detector",
+      "path": "document-detector/low-mobile-experimental",
+      "production_ready": false
+    },
+    {
+      "family": "document-detector",
+      "path": "document-detector/mid-mobile-experimental",
+      "production_ready": false
+    },
+    {
+      "family": "document-detector",
+      "path": "document-detector/high-mobile-experimental",
+      "production_ready": false
+    },
+    {
+      "family": "document-corners",
+      "path": "document-corners/low-mobile-experimental",
+      "production_ready": false
+    },
+    {
+      "family": "document-corners",
+      "path": "document-corners/mid-mobile-experimental",
+      "production_ready": false
+    },
+    {
+      "family": "document-corners",
+      "path": "document-corners/high-mobile-experimental",
+      "production_ready": false
+    },
+    {
+      "family": "document-quality",
+      "path": "document-quality/low-mobile-experimental",
+      "production_ready": false
+    },
+    {
+      "family": "document-quality",
+      "path": "document-quality/mid-mobile-experimental",
+      "production_ready": false
+    },
+    {
+      "family": "document-quality",
+      "path": "document-quality/high-mobile-experimental",
+      "production_ready": false
+    },
+    {
+      "family": "document-cleanup",
+      "path": "document-cleanup/low-mobile-experimental",
+      "production_ready": false
+    },
+    {
+      "family": "document-cleanup",
+      "path": "document-cleanup/mid-mobile-experimental",
+      "production_ready": false
+    },
+    {
+      "family": "document-cleanup",
+      "path": "document-cleanup/high-mobile-experimental",
+      "production_ready": false
+    },
+    {
+      "family": "document-restoration",
+      "path": "document-restoration/low-mobile-experimental",
+      "production_ready": false
+    },
+    {
+      "family": "document-restoration",
+      "path": "document-restoration/mid-mobile-experimental",
+      "production_ready": false
+    },
+    {
+      "family": "document-restoration",
+      "path": "document-restoration/high-mobile-experimental",
+      "production_ready": false
+    }
   ]
 }

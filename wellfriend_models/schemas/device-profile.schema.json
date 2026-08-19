@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"Wellfriend DeviceProfile","type":"object","required":["schema_version","device_class","precision","max_model_size_mb","max_latency_ms_placeholder","max_memory_mb_placeholder","input_resolution_policy","tiling_policy","runtime_targets","fallback_strategy"],"additionalProperties":false}
