@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "teacher_registry_slot": {"id": "DocRes", "audit_status": "audit-gated", "weights_included": false},
+  "student_registry_slot": {"id": "document-restoration-mobile", "production_ready": false},
+  "tasks": ["dewarping", "deshadowing", "appearance", "deblurring", "binarization", "end2end"],
+  "mobile_target_profiles": ["low", "mid", "high"],
+  "tiling_policy": "pyramid_lowres_predict_highres_apply",
+  "ocr_aware_metric_hooks": ["cer_delta_after_restoration", "wer_delta_after_restoration", "text_edge_preservation", "foreground_stroke_preservation", "binarization_text_contrast"],
+  "quality_metric_hooks": ["psnr", "ssim", "contrast_delta"],
+  "status": "audit-gated"
+}

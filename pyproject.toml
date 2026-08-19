@@ -12,6 +12,10 @@ dependencies = []
 
 [project.optional-dependencies]
 dev = ["pytest>=8,<10", "ruff>=0.14,<1"]
+torch = ["torch>=2.5,<3"]
+onnx = ["onnx>=1.16,<2"]
+quantization = ["onnxruntime>=1.20,<2"]
+benchmark = []
 
 [tool.setuptools.packages.find]
 include = ["wellfriend_models*"]

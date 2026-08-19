@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "status": "experimental",
+  "production_ready": false,
+  "weights_included": false,
+  "baselines": {
+    "appearance": "ClassicalRestorationBaseline.appearance_enhancement_baseline",
+    "binarization": "ClassicalRestorationBaseline.binarization_baseline",
+    "deshadowing": "ClassicalRestorationBaseline.deshadowing_baseline",
+    "deblurring": "placeholder",
+    "dewarping": "placeholder",
+    "end2end": "placeholder"
+  },
+  "limitations": ["not DocRes", "synthetic baseline only", "not production quality"]
+}

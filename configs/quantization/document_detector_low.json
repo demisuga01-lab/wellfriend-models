@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "artifact": {"model_id": "wellfriend.document-detector-mobile.low.experimental"},
+  "target_precision": "dynamic_int8",
+  "calibration": {"source": "synthetic-manifest", "manifest_hash": "def487bc000bdbee63174411a77944f411e554b0bd7a638a0d1958830f12c3e2"},
+  "unsupported_ops": [],
+  "validation_plan": {"metadata": true, "onnx_optional": true, "runtime_optional": true}
+}
